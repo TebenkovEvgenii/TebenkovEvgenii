@@ -1,0 +1,3327 @@
+{
+	"info": {
+		"_postman_id": "f0b63e6e-4418-4410-84aa-72cfbded6cf9",
+		"name": "Core",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39397150"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Registration",
+					"item": [
+						{
+							"name": "New_User_(1)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify status is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Verify that user_id exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.user_id).to.exist;\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// Генерация уникального адреса электронной почты\r",
+											"const timestamp = new Date().getTime(); // Получаем текущую метку времени\r",
+											"const email = `user${timestamp}@example.com`; // Формируем адрес электронной почты\r",
+											"\r",
+											"// Функция для генерации случайного пароля\r",
+											"function generatePassword(length) {\r",
+											"    const charset = \"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&*\"; // Набор символов\r",
+											"    let password = \"\";\r",
+											"    for (let i = 0; i < length; i++) {\r",
+											"        const randomIndex = Math.floor(Math.random() * charset.length); // Генерируем случайный индекс\r",
+											"        password += charset[randomIndex]; // Добавляем символ к паролю\r",
+											"    }\r",
+											"    return password;\r",
+											"}\r",
+											"\r",
+											"// Генерация пароля длиной 12 символов\r",
+											"const password = generatePassword(12);\r",
+											"\r",
+											"// Сохранение значений в переменные окружения Postman\r",
+											"pm.environment.set(\"uniqueEmail\", email);\r",
+											"pm.environment.set(\"uniquePassword\", password);\r",
+											"\r",
+											"// Логируем результаты (для просмотра в консоли Postman)\r",
+											"console.log(\"Сгенерированный email:\", email);\r",
+											"console.log(\"Сгенерированный пароль:\", password);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"{{uniqueEmail}}\",\r\n    \"password\": \"{{uniquePassword}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/users",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New_User_trim_(2)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify status is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Verify that user_id exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.user_id).to.exist;\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// Генерация уникального адреса электронной почты\r",
+											"const timestamp = new Date().getTime(); // Получаем текущую метку времени\r",
+											"const email = `     user${timestamp}@example.com       `; // Формируем адрес электронной почты\r",
+											"\r",
+											"// Функция для генерации случайного пароля\r",
+											"function generatePassword(length) {\r",
+											"    const charset = \"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&*\"; // Набор символов\r",
+											"    let password = \"\";\r",
+											"    for (let i = 0; i < length; i++) {\r",
+											"        const randomIndex = Math.floor(Math.random() * charset.length); // Генерируем случайный индекс\r",
+											"        password += charset[randomIndex]; // Добавляем символ к паролю\r",
+											"    }\r",
+											"    return password;\r",
+											"}\r",
+											"\r",
+											"// Генерация пароля длиной 12 символов\r",
+											"const password = generatePassword(12);\r",
+											"\r",
+											"// Сохранение значений в переменные окружения Postman\r",
+											"pm.environment.set(\"uniqueEmail\", email);\r",
+											"pm.environment.set(\"uniquePassword\", password);\r",
+											"\r",
+											"// Логируем результаты (для просмотра в консоли Postman)\r",
+											"console.log(\"Сгенерированный email:\", email);\r",
+											"console.log(\"Сгенерированный пароль:\", password);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"{{uniqueEmail}}\",\r\n    \"password\": \"{{uniquePassword}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/users",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Email_without_@_(3)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify status is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"pm.test(\"Verify that code is 'invalid_email'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.code).to.eql(\"invalid_email\");\r",
+											"});\r",
+											"pm.test(\"Verify that message is 'Invalid parameter: email'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.message).to.eql(\"Invalid parameter: email\");\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"    1234mail.ru     \",\r\n  \"password\": \"jgjgjg\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/users",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Empty_value_email_(4)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify status is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"pm.test(\"Verify that code is 'invalid_email'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.code).to.eql(\"invalid_email\");\r",
+											"});\r",
+											"pm.test(\"Verify that message is 'Invalid parameter: email'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.message).to.eql(\"Invalid parameter: email\");\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"\",\r\n  \"password\": \"любой пароль\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/users",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Lack_parameter_email_(5)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"pm.test(\"Verify that code is 'invalid_email'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.code).to.eql(\"invalid_email\");\r",
+											"});\r",
+											"pm.test(\"Verify that message is 'Invalid parameter: email'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.message).to.eql(\"Invalid parameter: email\");\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"password\": \"любой пароль\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/users",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Empty_value_password_(6)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify status is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"pm.test(\"Verify that code is 'invalid_password'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.code).to.eql(\"invalid_password\");\r",
+											"});\r",
+											"pm.test(\"Verify that message is 'Invalid parameter: password'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.message).to.eql(\"Invalid parameter: password\");\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"    1234@mail.ru    \",\r\n  \"password\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/users",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Lack_parameter_password_(7)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify status is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"pm.test(\"Verify that code is 'invalid_password'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.code).to.eql(\"invalid_password\");\r",
+											"});\r",
+											"pm.test(\"Verify that message is 'Invalid parameter: password'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.message).to.eql(\"Invalid parameter: password\");\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"    1234@mail.ru    \"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/users",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"users"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Authorization",
+					"item": [
+						{
+							"name": "Existent_user_(1)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify status is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Verify that user_id exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.user_id).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that access_token is exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    var accessToken = jsonData.result.access_token;\r",
+											"    pm.expect(jsonData.result.access_token).to.exist;\r",
+											"\r",
+											"    // Сохранение значений в переменные окружения Postman    \r",
+											"    pm.environment.set(\"accessToken\", accessToken);\r",
+											"    \r",
+											"    // Логируем результаты (для просмотра в консоли Postman)\r",
+											"    console.log(\"accessToken\", accessToken);\r",
+											"});\r",
+											"pm.test(\"Verify that expires_in is exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.expires_in).to.exist;\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"{{uniqueEmail}}\",\r\n    \"password\": \"{{uniquePassword}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/users/login",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"users",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Non-existent_user_(2)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify status is 401\", function () {\r",
+											"    pm.response.to.have.status(401);\r",
+											"});\r",
+											"pm.test(\"Verify that code is 'invalid_email_or_password'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.code).to.eql(\"invalid_email_or_password\");\r",
+											"});\r",
+											"pm.test(\"Verify that message is 'Incorrect email or password'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.message).to.eql(\"Incorrect email or password\");\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n     \"email\": \"11234@mail.ru\",\r\n  \"password\": \"jgjgjg\"\r\n} ",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/users/login",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"users",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Empty_value_email_(3)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify status is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"pm.test(\"Verify that code is 'invalid_email'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.code).to.eql(\"invalid_email\");\r",
+											"});\r",
+											"pm.test(\"Verify that message is 'Invalid parameter: email'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.message).to.eql(\"Invalid parameter: email\");\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"\",\r\n  \"password\": \"любой пароль\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/users/login",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"users",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Lack_parameter_email_(4)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"pm.test(\"Verify that code is 'invalid_email'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.code).to.eql(\"invalid_email\");\r",
+											"});\r",
+											"pm.test(\"Verify that message is 'Invalid parameter: email'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.message).to.eql(\"Invalid parameter: email\");\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"password\": \"любой пароль\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/users/login",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"users",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Empty_value_password_(5)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify status is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"pm.test(\"Verify that code is 'invalid_password'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.code).to.eql(\"invalid_password\");\r",
+											"});\r",
+											"pm.test(\"Verify that message is 'Invalid parameter: password'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.message).to.eql(\"Invalid parameter: password\");\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"    1234@mail.ru    \",\r\n  \"password\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/users/login",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"users",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Lack_parameter_password_(6)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify status is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"pm.test(\"Verify that code is 'invalid_password'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.code).to.eql(\"invalid_password\");\r",
+											"});\r",
+											"pm.test(\"Verify that message is 'Invalid parameter: password'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.message).to.eql(\"Invalid parameter: password\");\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"    1234@mail.ru    \"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/users/login",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"users",
+										"login"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Logout (убрать в конец)",
+					"item": [
+						{
+							"name": "Valid_token_(1)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify status is 204\", function () {\r",
+											"    pm.response.to.have.status(204);\r",
+											"});\r",
+											"pm.test(\"Body is empty\", function () {\r",
+											"       pm.expect(pm.response.text()).to.be.empty;\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{accessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/users/logout",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"users",
+										"logout"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Invalid_token_(2)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify status is 401\", function () {\r",
+											"    pm.response.to.have.status(401);\r",
+											"});\r",
+											"pm.test(\"Verify that code is 'invalid_access_token'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.code).to.eql(\"invalid_access_token\");\r",
+											"});\r",
+											"pm.test(\"Verify that message is 'Invalid access token'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.message).to.eql(\"Invalid access token\");\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "63139692ba39f9159f14f329619f62e7a978fd4e397b06e30a6cb985fb5e6267",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/users/logout",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"users",
+										"logout"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Email",
+			"item": [
+				{
+					"name": "Getting email confirmation status",
+					"item": [
+						{
+							"name": "Email_confirmed_(1)(заменить токена на const)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify status is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Verify that result status is true\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.status).to.eql(true);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "a1d4c1ec04ff04e73e7b71dd209901d89ed9bf48d89f56a9fdf7e8a72774e30b",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/users/email-verification/check",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"users",
+										"email-verification",
+										"check"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Email_not_confirmed_(2)*",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify status is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Verify that result status is true\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.status).to.eql(true);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "a1d4c1ec04ff04e73e7b71dd209901d89ed9bf48d89f56a9fdf7e8a72774e30b",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/users/email-verification/check",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"users",
+										"email-verification",
+										"check"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Invalid_access_token(постаить после logout)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Fixed missing closing parenthesis\r",
+											"pm.test(\"Verify status is 401\", function () {\r",
+											"    pm.response.to.have.status(401);\r",
+											"});\r",
+											"pm.test(\"Verify that code is 'invalid_access_token'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.code).to.eql(\"invalid_access_token\");\r",
+											"});\r",
+											"pm.test(\"Verify that message is 'Invalid access token'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.message).to.eql(\"Invalid access token\");\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "a1d4c1ec04ff04e73e7b71dd209901d89ed9bf48d89f56a9fdf7e8a72774e30b1",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/users/email-verification/check",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"users",
+										"email-verification",
+										"check"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Sending a confirmation code to email",
+					"item": [
+						{
+							"name": "Valid_data_(1)(заменить токена на const)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify status is 204\", function () {\r",
+											"    pm.response.to.have.status(204);\r",
+											"});\r",
+											"pm.test(\"Body is empty\", function () {\r",
+											"       pm.expect(pm.response.text()).to.be.empty;\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "a2e7ea11e1c2c0097ee10fccd2bb0dcfc15fce30f9ba3197730d8210e79edee21",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/users/email-verification/resend",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"users",
+										"email-verification",
+										"resend"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Invalid_token_(2)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify status is 401\", function () {\r",
+											"    pm.response.to.have.status(401);\r",
+											"});\r",
+											"pm.test(\"Verify that code is 'invalid_access_token'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.code).to.eql(\"invalid_access_token\");\r",
+											"});\r",
+											"pm.test(\"Verify that message is 'Invalid access token'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.message).to.eql(\"Invalid access token\");\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "a1d4c1ec04ff04e73e7b71dd209901d89ed9bf48d89f56a9fdf7e8a72774e30b1",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/users/email-verification/resend",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"users",
+										"email-verification",
+										"resend"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Multiple_sending_(3)(заменить токена на const)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"   const maxIterations = 5; // Максимальное число отправок запроса\r",
+											"   let iteration = pm.environment.get('iteration') || 0;\r",
+											"\r",
+											"   pm.test(\"Iteration \" + iteration, function () {\r",
+											"       pm.expect(iteration).to.be.below(maxIterations + 1);\r",
+											"       \r",
+											"       if (iteration < maxIterations) {\r",
+											"           pm.execution.setNextRequest(pm.info.requestName);\r",
+											"       } else {\r",
+											"           // Сбросить счетчик итераций, если достигли предела\r",
+											"           pm.environment.set('iteration', 0);\r",
+											"       }\r",
+											"   });\r",
+											"   \r",
+											"\r",
+											"   \r",
+											"\r",
+											"               //Tests\r",
+											"pm.test(\"Verify status is 429\", function () {\r",
+											"    pm.response.to.have.status(429);\r",
+											"});\r",
+											"pm.test(\"Verify that code is 'rate_limit_exceeded'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.code).to.eql(\"rate_limit_exceeded\");\r",
+											"});\r",
+											"pm.test(\"Verify that message is 'Request limit exceeded'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.message).to.eql(\"Request limit exceeded\");\r",
+											"});\r",
+											"pm.test(\"Verify that delay is exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.delay).to.exist;\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"   let iteration = pm.environment.get('iteration') || 0;\r",
+											"   pm.environment.set('iteration', ++iteration);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "a1d4c1ec04ff04e73e7b71dd209901d89ed9bf48d89f56a9fdf7e8a72774e30b",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/users/email-verification/resend",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"users",
+										"email-verification",
+										"resend"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Email confirmation",
+					"item": [
+						{
+							"name": "Invalid_token_(1)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify status is 401\", function () {\r",
+											"    pm.response.to.have.status(401);\r",
+											"});\r",
+											"pm.test(\"Verify that code is 'invalid_access_token'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.code).to.eql(\"invalid_access_token\");\r",
+											"});\r",
+											"pm.test(\"Verify that message is 'Invalid access token'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.message).to.eql(\"Invalid access token\");\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "a1d4c1ec04ff04e73e7b71dd209901d89ed9bf48d89f56a9fdf7e8a72774e30b1",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/users/email-verification/verify",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"users",
+										"email-verification",
+										"verify"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Empty_value_email_(2)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"pm.test(\"Verify that code is 'invalid_email'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.code).to.eql(\"invalid_email\");\r",
+											"});\r",
+											"pm.test(\"Verify that message is 'Invalid parameter: email'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.message).to.eql(\"Invalid parameter: email\");\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{accessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"\",\r\n  \"code\": \"код подтверждения\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/users/email-verification/verify",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"users",
+										"email-verification",
+										"verify"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Lack_parameter_email_(3)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"pm.test(\"Verify that code is 'invalid_email'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.code).to.eql(\"invalid_email\");\r",
+											"});\r",
+											"pm.test(\"Verify that message is 'Invalid parameter: email'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.message).to.eql(\"Invalid parameter: email\");\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{accessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"code\": \"код подтверждения\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/users/email-verification/verify",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"users",
+										"email-verification",
+										"verify"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Email_without_\"@.\"_(4)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"pm.test(\"Verify that code is 'invalid_email'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.code).to.eql(\"invalid_email\");\r",
+											"});\r",
+											"pm.test(\"Verify that message is 'Invalid parameter: email'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.message).to.eql(\"Invalid parameter: email\");\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{accessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"123mailru\",\r\n  \"code\": \"код подтверждения\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/users/email-verification/verify",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"users",
+										"email-verification",
+										"verify"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Someone_else's_email_(5)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify status code is 403\", function () {\r",
+											"    pm.response.to.have.status(403);\r",
+											"});\r",
+											"pm.test(\"Verify that code is 'email_access_denied'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.code).to.eql(\"email_access_denied\");\r",
+											"});\r",
+											"pm.test(\"Verify that message is 'Invalid parameter: email'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.message).to.eql(\"Email access denied\");\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{accessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"1@mail.ru\",\r\n  \"code\": \"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/users/email-verification/verify",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"users",
+										"email-verification",
+										"verify"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Empty_value_code_(6)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"pm.test(\"Verify that code is 'invalid_code'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.code).to.eql(\"invalid_code\");\r",
+											"});\r",
+											"pm.test(\"Verify that message is 'Incorrect verification code'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.message).to.eql(\"Incorrect verification code\");\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{accessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"1@mail.ru\",\r\n  \"code\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/users/email-verification/verify",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"users",
+										"email-verification",
+										"verify"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Lack_parameter_code_(7)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"pm.test(\"Verify that code is 'invalid_code'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.code).to.eql(\"invalid_code\");\r",
+											"});\r",
+											"pm.test(\"Verify that message is 'Incorrect verification code'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.message).to.eql(\"Incorrect verification code\");\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{accessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"1@mail.ru\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/users/email-verification/verify",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"users",
+										"email-verification",
+										"verify"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Invalid_confirmation_code_(8)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"pm.test(\"Verify that code is 'invalid_code'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.code).to.eql(\"invalid_code\");\r",
+											"});\r",
+											"pm.test(\"Verify that message is 'Incorrect verification code'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.message).to.eql(\"Incorrect verification code\");\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{accessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"{{uniqueEmail}}\",\r\n  \"code\": \"111111\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/users/email-verification/verify",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"users",
+										"email-verification",
+										"verify"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Valid_data_(9)(взять код из cache)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify status is 204\", function () {\r",
+											"    pm.response.to.have.status(204);\r",
+											"});\r",
+											"pm.test(\"Body is empty\", function () {\r",
+											"       pm.expect(pm.response.text()).to.be.empty;\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{accessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"{{uniqueEmail}}\",\r\n  \"code\": \"411084\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/users/email-verification/verify",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"users",
+										"email-verification",
+										"verify"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Models",
+			"item": [
+				{
+					"name": "Get_list_models",
+					"item": [
+						{
+							"name": "Available_and_active_(1)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Fixed syntax and added response data extraction for consistency\r",
+											"pm.test(\"Verify status is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Verify that id exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result[0].id).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that name exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result[0].name).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that provider exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result[0].provider).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that version exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result[0].version).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that available is true\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result[0].available).to.eql(true);\r",
+											"});\r",
+											"pm.test(\"Verify that status_code is active\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result[0].status_code).to.eql(\"active\");\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/models",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"models"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Insufficient_quota_(2)(сменить статус API ключа: недостаточно средств на API-ключе)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Fixed syntax and added response data extraction for consistency\r",
+											"pm.test(\"Verify status is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Verify that id exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result[0].id).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that name exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result[0].name).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that provider exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result[0].provider).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that version exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result[0].version).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that available is false\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result[0].available).to.eql(false);\r",
+											"});\r",
+											"pm.test(\"Verify that status_code is insufficient_quota\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result[0].status_code).to.eql(\"insufficient_quota\");\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"packages": {},
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/models",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"models"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Error_API_Key_(3)(сменить статус API ключа: ошибка API-ключа)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Fixed syntax and added response data extraction for consistency\r",
+											"pm.test(\"Verify status is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Verify that id exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result[0].id).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that name exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result[0].name).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that provider exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result[0].provider).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that version exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result[0].version).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that available is false\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result[0].available).to.eql(false);\r",
+											"});\r",
+											"pm.test(\"Verify that status_code is \", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result[0].status_code).to.eql(\"error\");\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "text"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/models",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"models"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "No_available_models_(4)(удалить все модели приложения)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify status is 204\", function () {\r",
+											"    pm.response.to.have.status(204);\r",
+											"});\r",
+											"pm.test(\"Body is empty\", function () {\r",
+											"       pm.expect(pm.response.text()).to.be.empty;\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "text"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/models",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"models"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "1_of_3_keys_active_(5)(3 ключа с разными статусами)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Fixed syntax and added response data extraction for consistency\r",
+											"pm.test(\"Verify status is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Verify that id exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result[0].id).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that name exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result[0].name).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that provider exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result[0].provider).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that version exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result[0].version).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that available is true\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result[0].available).to.eql(true);\r",
+											"});\r",
+											"pm.test(\"Verify that status_code is active\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result[0].status_code).to.eql(\"active\");\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "text"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/models",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"models"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "1_of_2_keys_Insufficient_quota_(6)(2 ключа, статусы: превышена квота и ошибка)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Fixed syntax and added response data extraction for consistency\r",
+											"pm.test(\"Verify status is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Verify that id exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result[0].id).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that name exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result[0].name).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that provider exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result[0].provider).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that version exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result[0].version).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that available is false\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result[0].available).to.eql(false);\r",
+											"});\r",
+											"pm.test(\"Verify that status_code is insufficient_quota\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result[0].status_code).to.eql(\"insufficient_quota\");\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "text"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/models",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"models"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "2_of_2_keys_error_(7)(2 ключа, статусы: ошибка)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Fixed syntax and added response data extraction for consistency\r",
+											"pm.test(\"Verify status is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Verify that id exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result[0].id).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that name exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result[0].name).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that provider exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result[0].provider).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that version exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result[0].version).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that available is false\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result[0].available).to.eql(false);\r",
+											"});\r",
+											"pm.test(\"Verify that status_code is \", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result[0].status_code).to.eql(\"error\");\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "text"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/models",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"models"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get_model_by_id",
+					"item": [
+						{
+							"name": "Available_and_active_(1)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Fixed syntax and added response data extraction for consistency\r",
+											"pm.test(\"Verify status is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Verify that id exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.id).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that name exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.name).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that provider exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.provider).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that version exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.version).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that available is true\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.available).to.eql(true);\r",
+											"});\r",
+											"pm.test(\"Verify that status_code is active\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.status_code).to.eql(\"active\");\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/models/1",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"models",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Insufficient_quota_(2)(сменить статус API ключей: недостаточно средств на API-ключе)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Fixed syntax and added response data extraction for consistency\r",
+											"pm.test(\"Verify status is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Verify that id exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.id).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that name exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.name).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that provider exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.provider).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that version exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.version).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that available is false\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.available).to.eql(false);\r",
+											"});\r",
+											"pm.test(\"Verify that status_code is insufficient_quota\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.status_code).to.eql(\"insufficient_quota\");\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/models/1",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"models",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Error_API_Key_(3)(сменить статус API ключей: ошибка API-ключа)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Fixed syntax and added response data extraction for consistency\r",
+											"pm.test(\"Verify status is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Verify that id exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.id).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that name exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.name).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that provider exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.provider).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that version exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.version).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that available is false\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.available).to.eql(false);\r",
+											"});\r",
+											"pm.test(\"Verify that status_code is error\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.status_code).to.eql(\"error\");\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "text"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/models/1",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"models",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Invalid_model_id_(4)(put id=8 but models<8)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify status is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"pm.test(\"Verify that 'code': 'model_not_found'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.code).to.eql(\"model_not_found\");\r",
+											"});\r",
+											"pm.test(\"Verify that 'message': 'Model not found'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.message).to.eql(\"Model not found\");\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "text"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/models/8",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"models",
+										"8"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Invalid_model_id_(5)(put id=0)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify status is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"pm.test(\"Verify that 'code': 'model_not_found'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.code).to.eql(\"model_not_found\");\r",
+											"});\r",
+											"pm.test(\"Verify that 'message': 'Model not found'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.message).to.eql(\"Model not found\");\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "text"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/models/0",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"models",
+										"0"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "1_of_3_keys_active_(6)(3 ключа с разными статусами)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Fixed syntax and added response data extraction for consistency\r",
+											"pm.test(\"Verify status is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Verify that id exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.id).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that name exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.name).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that provider exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.provider).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that version exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.version).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that available is true\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.available).to.eql(true);\r",
+											"});\r",
+											"pm.test(\"Verify that status_code is active\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.status_code).to.eql(\"active\");\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "text"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/models/1",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"models",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "1_of_2_keys_Insufficient_quota_(7)(2 ключа, статусы: превышена квота и ошибка)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Fixed syntax and added response data extraction for consistency\r",
+											"pm.test(\"Verify status is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Verify that id exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.id).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that name exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.name).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that provider exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.provider).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that version exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.version).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that available is false\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.available).to.eql(false);\r",
+											"});\r",
+											"pm.test(\"Verify that status_code is insufficient_quota\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.status_code).to.eql(\"insufficient_quota\");\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "text"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/models/1",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"models",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "2_of_2_keys_error_(8)(2 ключа, статусы: ошибка)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Fixed syntax and added response data extraction for consistency\r",
+											"pm.test(\"Verify status is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Verify that id exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.id).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that name exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.name).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that provider exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.provider).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that version exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.version).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that available is false\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.available).to.eql(false);\r",
+											"});\r",
+											"pm.test(\"Verify that status_code is error\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.status_code).to.eql(\"error\");\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "text"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/models/1",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"models",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get_config_by_id",
+					"item": [
+						{
+							"name": "Available_active_configured_(1)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify status is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Verify that temperature exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.temperature).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that presence_penalty exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.presence_penalty).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that frequency_penalty exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.frequency_penalty).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that top_probability exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.top_probability).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that instructions exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.instructions).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that max_tokens exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.max_tokens).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that number exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.number).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that stop_words exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.stop_words).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that response_type exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.response_type).to.exist;\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/models/1/config",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"models",
+										"1",
+										"config"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Available_active_not_configured_(2)_(создай модель заново)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify status is 204\", function () {\r",
+											"    pm.response.to.have.status(204);\r",
+											"});\r",
+											"pm.test(\"Body is empty\", function () {\r",
+											"       pm.expect(pm.response.text()).to.be.empty;\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/models/1/config",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"models",
+										"1",
+										"config"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Available_active_partially_configured_(3)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify status is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Verify that temperature exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.temperature).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that presence_penalty exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.presence_penalty).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that frequency_penalty exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.frequency_penalty).to.exist;\r",
+											"});\r",
+											"pm.test(\"Verify that top_probability exist\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result.top_probability).to.exist;\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/models/1/config",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"models",
+										"1",
+										"config"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Invalid_model_id_(4)(put id=8 but models<8)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify status is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"pm.test(\"Verify that 'code': 'model_not_found'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.code).to.eql(\"model_not_found\");\r",
+											"});\r",
+											"pm.test(\"Verify that 'message': 'Model not found'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.message).to.eql(\"Model not found\");\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "text"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/models/8/config",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"models",
+										"8",
+										"config"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Invalid_model_id_(5)(put id=0)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify status is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"pm.test(\"Verify that 'code': 'model_not_found'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.code).to.eql(\"model_not_found\");\r",
+											"});\r",
+											"pm.test(\"Verify that 'message': 'Model not found'\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.error.message).to.eql(\"Model not found\");\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "text"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/models/0/config",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"models",
+										"0",
+										"config"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Configuring_by_id",
+					"item": [
+						{
+							"name": "Send_all_parameters_(1)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify status is 204\", function () {\r",
+											"    pm.response.to.have.status(204);\r",
+											"});\r",
+											"pm.test(\"Body is empty\", function () {\r",
+											"       pm.expect(pm.response.text()).to.be.empty;\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"instructions\": \"Ты ИИ модель, которая должна представляться ассистентом Лаймой\",\r\n  \"temperature\": 0.3,\r\n  \"top_probability\": 0.4,\r\n  \"presence_penalty\": 0.1,\r\n  \"frequency_penalty\": 0.1,\r\n  \"number\": 3,\r\n  \"stop_words\": \"js|||javascript\",\r\n  \"max_tokens\": 4096,\r\n  \"response_type\": \"text\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{testStand}}/api/v0/apps/{{appId}}/models/1/config",
+									"protocol": "http",
+									"host": [
+										"{{testStand}}"
+									],
+									"path": [
+										"api",
+										"v0",
+										"apps",
+										"{{appId}}",
+										"models",
+										"1",
+										"config"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
